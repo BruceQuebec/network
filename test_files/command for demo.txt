@@ -1,0 +1,31 @@
+httpc get http://httpbin.org/redirect-to?url=http%3A%2F%2Fwww.google.com&status_code=301
+
+httpc get 'http://httpbin.org/get?course=networking&assignment=1'
+
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
+
+httpc post -h Content-Type:application/json -d '{"Assignment":1}' http://httpbin.org/post
+
+httpc post -v -h Content-Type:application/json -d '{"Assignment":1}' http://httpbin.org/post
+
+httpc post -h Content-Type:application/json -d '{"Assignment":1}' http://httpbin.org/post -o ./test_files/hello.txt
+
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1' -o hello.txt
+
+httpc get http://httpbin.org/status/418
+
+httpc get -v http://httpbin.org/status/418
+
+httpc get -d http://httpbin.org/status/418
+
+httpc get -f http://httpbin.org/status/418
+
+httpc post -d -f http://httpbin.org/status/418
+
+httpc post -d -f http://httpbin.org/status/418
+
+http
+
+httpc http://httpbin.org/status/418
+
+httpc get
