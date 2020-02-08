@@ -34,7 +34,6 @@ public class TestHttpClientLib {
 	 * constructor
 	 * */
 	public TestHttpClientLib() throws MalformedURLException {
-		this.socket = new Socket();
 		this.context = new HashMap<>();
 		this.requestBody = new HashMap<>();
 		this.requestHeaders = new HashMap<>();
@@ -167,6 +166,7 @@ public class TestHttpClientLib {
 	 *
 	 * */
 	private void buildConnection() throws IOException {
+		this.socket = new Socket();
 		SocketAddress destination = new InetSocketAddress((String) this.context.get("host"), (int) this.context.get("port"));
 		this.socket.connect(destination);
 		
