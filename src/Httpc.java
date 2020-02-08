@@ -54,6 +54,14 @@ public class Httpc {
 		boolean parseFlag = true;
 		usrInput = usrInput.trim();
 		usrInput = usrInput.replaceAll("\\s{2,}", " ");
+		usrInput = usrInput.replace("' {", "'{");
+		usrInput = usrInput.replace("{ \" ", "{\"");
+		usrInput = usrInput.replace(" \" :", "\":");
+		usrInput = usrInput.replace(" :", ":");
+		usrInput = usrInput.replace(": ", ":");
+		usrInput = usrInput.replace(" }", "}");
+		usrInput = usrInput.replace("} '", "}'");
+		
 		String[] usrInputArr = usrInput.split("\\s");
 		
 		if((usrInputArr==null) || !("httpc".equals(usrInputArr[0]))) {
@@ -146,6 +154,7 @@ public class Httpc {
 				case "-o":
 					String fileDir = usrInputArr[i+1];
 					File file = new File(fileDir);
+					
 					if(!file.createNewFile() && !file.exists()) {
 						System.err.println("file creation failed or incorrect file path!\n");
 						checkRes = false;
@@ -255,21 +264,28 @@ public class Httpc {
 		Httpc httpc = new Httpc(testHttpClientLib);
 		Scanner input = new Scanner(System.in);
 		do {
-			System.out.println("please input httpc command here:");
+			System.out.println("please input httpc command here (enter 'q' to exit):");
 			System.out.print(">>> ");
 			String usrIput = input.nextLine();
+			if("q".equals(usrIput)) {
+				flag = true;
+				System.out.println("Httpc command line has been terminated.");
+				break;
+			}
 			flag = httpc.parseUsrInput(usrIput);
+			if(flag) {
+				switch((String) httpc.getHttpContext().getContext().get("method")) {
+					case "GET":
+						httpc.getHttpContext().get();
+						break;
+					case "POST":
+						httpc.getHttpContext().post();
+						break;
+				}
+			}
+			flag = false;
 		}
 		while(!flag);
-		
 		input.close();
-		switch((String) httpc.getHttpContext().getContext().get("method")) {
-			case "GET":
-				httpc.getHttpContext().get();
-				break;
-			case "POST":
-				httpc.getHttpContext().post();
-				break;
-		}
 	}
 }
