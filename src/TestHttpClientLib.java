@@ -151,6 +151,9 @@ public class TestHttpClientLib {
 		bufferedWriter.write(System.getProperty("line.separator"));
 		for(String line : serverResponseArray) {
 			matcher = Pattern.compile(this._SERVER_RESPONSE_HEADER_REGEX).matcher(line);
+			if(matcher.lookingAt() && this._VERBOSE_MODE_IDENTIFIER.equals((String) this.context.get("output"))) {
+				bufferedWriter.write(line + System.getProperty("line.separator"));
+			}
 			if(!matcher.lookingAt()) {
 				bufferedWriter.write(line + System.getProperty("line.separator"));
 			}
