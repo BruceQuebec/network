@@ -1,0 +1,28 @@
+get test:
+httpc get 'http://httpbin.org/get?course=networking&assignment=1'
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
+httpc get http://httpbin.org/status/418
+httpc get -v http://httpbin.org/status/418
+
+post test:
+httpc post -h Content-Type:application/json -d '{"Assignment":1}' http://httpbin.org/post
+httpc post -v -h Content-Type:application/json -d '{"Assignment":1}' http://httpbin.org/post
+
+post data from local file test:
+httpc post -v -f C:\Users\oscar\Desktop\test_post_data.txt http://httpbin.org/post
+
+redirect test:
+httpc get http://httpbin.org/redirect-to?url=http%3A%2F%2Fwww.google.com&status_code=301
+httpc get http://httpbin.org/redirect-to?url=http://httpbin.org/status/418&status_code=301
+
+write response to local file test:
+httpc post -h Content-Type:application/json -d '{"Assignment":1}' http://httpbin.org/post -o C:\Users\oscar\Desktop\hello.txt
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1' -o C:\Users\oscar\Desktop\hello.txt
+
+illegal input test:
+httpc get -d http://httpbin.org/status/418
+httpc get -f http://httpbin.org/status/418
+httpc post -d -f http://httpbin.org/status/418
+http
+httpc http://httpbin.org/status/418
+httpc get
