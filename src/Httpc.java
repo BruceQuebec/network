@@ -272,6 +272,9 @@ public class Httpc {
 				System.out.println("Httpc command line has been terminated.");
 				break;
 			}
+			testHttpClientLib.getContext().clear();
+			testHttpClientLib.getRequestHeaders().clear();
+			testHttpClientLib.getRequestBody().clear();
 			flag = httpc.parseUsrInput(usrIput);
 			if(flag) {
 				switch((String) httpc.getHttpContext().getContext().get("method")) {
