@@ -1,3 +1,4 @@
+A1:
 get test:
 httpc get 'http://httpbin.org/get?course=networking&assignment=1'
 httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
@@ -26,3 +27,22 @@ httpc post -d -f http://httpbin.org/status/418
 http
 httpc http://httpbin.org/status/418
 httpc get
+
+A2:
+1.(1)httpfs -v -p 8080
+  (2)httpc get -v http://localhost:8080/
+  (3)httpc post -d '{"Assignment":1}' http://localhost:8080/test_files/hello.txt
+  (4)httpc post -d '{"Assignment":1}' http://localhost:8080/hello.txt
+  (5)httpc post -d '{"Assignment":1}' http://localhost:8080/
+  (6)httpc post -d '{"Assignment":1}' http://localhost:8080/test_files
+  (7)httpc get -v http://localhost:8080/hello.txt
+  (8)httpc get -v http://localhost:8080/test_files/command_for_demo.txt
+2.(1)httpfs -v -p 8080 -d /test_files
+  (2)httpc get -v http://localhost:8080/
+  (3)httpc post -d '{"Assignment":1}' http://localhost:8080/hello.txt
+  (4)httpc post -d '{"Assignment":1}' http://localhost:8080/test_files/hello.txt
+  (5)httpc get -v http://localhost:8080/command_for_demo.txt
+  (6)httpc post -d '{"Assignment":1}' http://localhost:8080/
+  (7)httpc post -d '{"Assignment":1}' http://localhost:8080/test_files
+  (8)httpc get -v http://localhost:8080/hello.txt
+  (9)httpc get -v http://localhost:8080/test_files/command_for_demo.txt
