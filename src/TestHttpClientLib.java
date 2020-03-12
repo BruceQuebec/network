@@ -125,6 +125,12 @@ public class TestHttpClientLib {
 		System.out.println("The request is now being redirected to the following URL: " + directedLocation);
 		URL url = new URL(directedLocation);
 		this.context.put("host" , url.getHost());
+		if(url.getPort()==-1) {
+			this.context.put("port", url.getDefaultPort());
+		}
+		else {
+			this.context.put("port", url.getPort());
+		}
 		this.context.put("port" , url.getDefaultPort());
 		this.context.put("path" , url.getPath());
 		this.requestHeaders.put("Host",url.getHost());
@@ -172,7 +178,7 @@ public class TestHttpClientLib {
 		this.socket = new Socket();
 		SocketAddress destination = new InetSocketAddress((String) this.context.get("host"), (int) this.context.get("port"));
 		this.socket.connect(destination);
-		
+		System.out.println("post is: " + this.context.get("port"));
 		OutputStreamWriter streamWriter = new OutputStreamWriter(this.socket.getOutputStream());
 		this.bufferedWriter = new BufferedWriter(streamWriter);
 	}
@@ -187,7 +193,7 @@ public class TestHttpClientLib {
 			postBodyParams[count] = postBodyParam;
 			count++;
 		}
-		data = String.join("&", postBodyParams);
+		data = String.join("&", postBodyParams)+System.getProperty("line.separator");
 		return data;
 	}
 	
