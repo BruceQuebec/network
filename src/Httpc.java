@@ -233,7 +233,12 @@ public class Httpc {
 					URL url = new URL(params);
 					this.httpContext.getContext().put("url", params);
 					this.httpContext.getContext().put("host", url.getHost());
-					this.httpContext.getContext().put("port", url.getDefaultPort());
+					if(url.getPort()==-1) {
+						this.httpContext.getContext().put("port", url.getDefaultPort());
+					}
+					else {
+						this.httpContext.getContext().put("port", url.getPort());
+					}
 					this.httpContext.getContext().put("path", url.getPath());
 					this.httpContext.getContext().put("file", url.getFile());
 					this.httpContext.getContext().put("query", url.getQuery());
